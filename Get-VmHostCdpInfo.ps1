@@ -1,7 +1,22 @@
+<# 
+Get-VmHostCdpInfo.ps1
+
+.Description
+    Get host vmnic and port id
+	
+.Acknowledgments 
+    
+.Example
+    ./Get-VmHostCdpInfo.ps1 <ESXi Host>
+#>
+
 param($VMHost)
+
+if ($VMHost -ne " "){  
 $vmh = Get-VMHost $VMHost
+
 If ($vmh.ConnectionState -ne "Connected") {
-  Write-Output "Host $($vmh) state is not connected, skipping."
+  Write-Output "Host is not connected, or specified>" 
   }
 Else {
   Get-View $vmh.ID | `
@@ -19,4 +34,5 @@ Else {
       }
     }
   }
+}
 }
